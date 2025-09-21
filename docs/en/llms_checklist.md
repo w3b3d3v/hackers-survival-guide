@@ -281,7 +281,7 @@ npx hardhat ignition deploy ./ignition/modules/YourModule.js --network passetHub
 
 ### Removing OpenZeppelin Dependencies
 
-#### Instead of OpenZeppelin Ownable:
+#### Instead of OpenZeppelin Ownablee:
 
 ```solidity
 contract SimpleOwnable {
