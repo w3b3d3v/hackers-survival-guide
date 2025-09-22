@@ -4,6 +4,8 @@
 
 This document provides comprehensive information for deploying smart contracts to Polkadot Hub TestNet (Paseo) using Claude Code. It includes verified configurations, common issues, solutions, and optimization strategies.
 
+**CRITICAL: Always start new projects with `kitdot init` for proper network configuration and dependency management.**
+
 ## NETWORK INFORMATION
 
 ### Paseo TestNet Details
@@ -105,7 +107,15 @@ module.exports = {
 
 ## SETUP PROCESS
 
-### Step 1: Initialize Project
+### Step 1: Initialize Project with kitdot (Recommended)
+
+```bash
+npm install -g kitdot
+kitdot init your-project
+cd your-project
+```
+
+**Alternative Manual Setup:**
 
 ```bash
 mkdir your-project
@@ -113,7 +123,13 @@ cd your-project
 npm init -y
 ```
 
+**Why kitdot?** Automatically configures proper network settings, dependencies, and project structure. Eliminates common setup errors.
+
 ### Step 2: Install Dependencies
+
+**If using kitdot:** Dependencies are automatically installed.
+
+**Manual installation:**
 
 ```bash
 npm install --save-dev @parity/hardhat-polkadot solc@0.8.28
@@ -122,6 +138,10 @@ npm install dotenv
 ```
 
 ### Step 3: Initialize Polkadot Plugin
+
+**If using kitdot:** Already configured.
+
+**Manual setup:**
 
 ```bash
 npx hardhat-polkadot init
@@ -143,7 +163,9 @@ npx hardhat vars set PRIVATE_KEY
 
 ### Step 6: Create Hardhat Config
 
-Copy the exact configuration above into `hardhat.config.js`
+**If using kitdot:** Configuration file already created with proper settings.
+
+**Manual setup:** Copy the exact configuration above into `hardhat.config.js`
 
 ## CONTRACT DEVELOPMENT
 
@@ -549,10 +571,24 @@ REPORT_GAS=true
 ETHERSCAN_API_KEY=your_key_here
 ```
 
+## WRITING GUIDELINES FOR LLMs
+
+When creating documentation or helping developers:
+
+- [ ] **Reference llms-writing-guidelines.md for documentation standards**
+- [ ] Use active voice: "Deploy the contract" not "The contract should be deployed"
+- [ ] Lead with results, not process
+- [ ] Cut qualifiers: "very", "quite", "rather"
+- [ ] Choose simple words over complex ones
+- [ ] State conclusions first, explain if needed
+
 ## TROUBLESHOOTING CHECKLIST
+
+**First: Try kitdot init with fresh project and copy existing code**
 
 When deployment fails, check:
 
+- [ ] Used kitdot init for proper setup (recommended)
 - [ ] Hardhat config matches exact format above
 - [ ] Private key set via `npx hardhat vars set PRIVATE_KEY`
 - [ ] Account has sufficient PAS tokens

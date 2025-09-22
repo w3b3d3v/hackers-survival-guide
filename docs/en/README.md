@@ -2,7 +2,7 @@
 
 _For Developers New to Web3_
 
-## 1. Quick Start
+## 1. Quick Start with kitdot
 
 ### Who This Guide Is For
 
@@ -11,6 +11,26 @@ Developers with solid programming skills but no Web3/Polkadot experience.
 ### Key Goal
 
 Deploy working smart contracts on Polkadot testnet and build a functional frontend within hackathon timeframes.
+
+### Start Your Project with kitdot
+
+**Recommended**: Use kitdot for proper network configuration and project setup:
+
+```bash
+npx kitdot install -y
+```
+
+or
+
+```bash
+npm install -g kitdot
+kitdot init my-polkadot-project
+cd my-polkadot-project
+```
+
+**Why kitdot?** Ensures proper network settings, correct dependencies, and battle-tested configurations. Skip setup headaches and start building immediately.
+
+**Existing Project?** Start fresh with kitdot and copy your files over. This prevents configuration conflicts and network connection issues.
 
 ## 2. Pre-Built Contract Libraries
 
@@ -70,17 +90,20 @@ flowchart TD
 2. Get testnet tokens from [faucet](https://faucet.polkadot.io/?parachain=1111)
 3. Start coding in browser
 
-### Path 2: Hardhat Setup
+### Path 2: Manual Hardhat Setup (Not Recommended)
 
-**Install Dependencies:**
+**Use kitdot instead** for automated setup, but if you must set up manually:
 
 ```bash
+# Better: Use kitdot init instead
 mkdir hackathon-project && cd hackathon-project
 npm init -y
 npm install --save-dev @parity/hardhat-polkadot solc@0.8.28
 npm install --force @nomicfoundation/hardhat-toolbox
 npx hardhat-polkadot init
 ```
+
+**kitdot handles this automatically** with proper network configurations.
 
 **Create hardhat.config.js:**
 
@@ -208,6 +231,7 @@ const result = await contract.someFunction();
 
 ### Template Projects
 
+- **kitdot (Recommended):** `kitdot init -y` - Configured templates with proper network settings
 - **React + Hardhat:** [create-polkadot-dapp](https://www.npmjs.com/package/create-polkadot-dapp)
 - **Examples:** [hardhat-polkadot-example](https://github.com/UtkarshBhardwaj007/hardhat-polkadot-example)
 
@@ -289,6 +313,7 @@ contract SimpleReentrancyGuard {
 
 **Detailed References:**
 
+- **LLM Development Guide:** Use `llms-writing-guidelines.md` when creating documentation
 - **Complete Setup:** `docs/seed-content/llms_checklist.md`
 - **Network Details:** `docs/seed-content/configs.md`
 - **Tools Overview:** `docs/polkadot-development-tools.md`
@@ -297,5 +322,9 @@ contract SimpleReentrancyGuard {
 
 - [Deploy Contracts Workshop](https://youtu.be/TGgpG1jPxeE)
 - [Smart Contracts on Polkadot](https://www.youtube.com/watch?v=GPuTt10dxKI)
+
+## Start with kitdot
+
+Use `kitdot init -y` for proper project setup with verified network configurations. Alternative templates available.
 
 You're building on Polkadot using familiar Ethereum tools. Focus on working functionality over perfect code.
