@@ -1,8 +1,10 @@
 # Índice
 
-* [Início](README.md)
+- [Início](README.md)
 
 ## Documentação
-* [Contratos Inteligentes 101](101-contratos-inteligentes-polkadot.md)
-* [Ferramentas de Desenvolvimento Polkadot](ferramentas-desenvolvimento-polkadot.md)
-* [Lista de Verificação LLMs](lista-verificacao-llms.md)
+
+- [Smart Contracts 101](101-smart-contracts-polkadot.md)
+- [Ferramentas de Desenvolvimento Polkadot](polkadot-development-tools.md)
+- [Lista de Verificação LLMs](llms_checklist.md)
+- [Diretrizes de Escrita LLMs](llms-writing-guidelines.md)
