@@ -1,0 +1,30 @@
+root: ./docs
+
+structure:
+  readme: README.md
+  summary: false
+
+variants:
+  - name: English
+    path: ./en
+    default: true
+  - name: Español
+    path: ./es
+  - name: Português
+    path: ./pt
+
+plugins:
+  - search
+  - sharing
+  - fontsettings
+  - theme-default
+
+pluginsConfig:
+  search:
+    maxIndexSize: 1000000
+  sharing:
+    facebook: true
+    twitter: true
+    google: true
+    linkedin: true
+    all: ["facebook", "google", "twitter", "linkedin"]
