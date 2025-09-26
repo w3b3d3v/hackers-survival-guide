@@ -69,14 +69,7 @@ Before building from scratch, explore these battle-tested contract libraries:
 
 ### Choose Your Path
 
-```mermaid
-flowchart TD
-    A[Start Building] --> B{Experience Level?}
-    B -->|Beginner| C[Remix IDE - Quick setup]
-    B -->|Experienced| D[Hardhat - Full setup]
-    C --> E[Ready to Code]
-    D --> E
-```
+![Development Path Flowchart](../flowchart.png)
 
 | Factor                | Remix IDE        | Hardhat            |
 | --------------------- | ---------------- | ------------------ |
@@ -235,6 +228,12 @@ const result = await contract.someFunction();
 - **React + Hardhat:** [create-polkadot-dapp](https://www.npmjs.com/package/create-polkadot-dapp)
 - **Examples:** [hardhat-polkadot-example](https://github.com/UtkarshBhardwaj007/hardhat-polkadot-example)
 
+### Project Management Template
+
+For effective hackathon project management and team collaboration:
+
+- **GitHub Projects Template:** [Hackathon Project Board](https://github.com/orgs/w3b3d3v/projects/34/views/1) - Ready-to-use project board with task tracking, sprint planning, and team coordination features
+
 ## 6. Troubleshooting
 
 ### Emergency Commands
@@ -300,6 +299,12 @@ contract SimpleReentrancyGuard {
 - Wrap: Technical highlights & future vision
 
 ## 11. Resources & Tools
+
+**Essential Documentation**
+
+- [Polkadot Open Source Tool Map](polkadot-development-tools.md): We've created a map of all the major open source tools on Polkadot.
+- [Polkadot Smart Contract Basic Guide](101-smart-contracts-polkadot.md): If you want to start from scratch and need more in-depth documentation on Polkadot smart contracts, such as a 101 for beginners, we suggest checking out this guide.
+
 
 **Development Environments:**
 

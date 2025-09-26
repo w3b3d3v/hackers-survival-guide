@@ -1,8 +1,10 @@
 # Tabla de Contenidos
 
-* [Inicio](README.md)
+- [Inicio](README.md)
 
 ## Documentación
-* [Contratos Inteligentes 101](101-contratos-inteligentes-polkadot.md)
-* [Herramientas de Desarrollo Polkadot](herramientas-desarrollo-polkadot.md)
-* [Lista de Verificación LLMs](lista-verificacion-llms.md)
+
+- [Smart Contracts 101](101-smart-contracts-polkadot.md)
+- [Herramientas de Desarrollo Polkadot](polkadot-development-tools.md)
+- [Lista de Verificación LLMs](llms_checklist.md)
+- [Pautas de Escritura LLMs](llms-writing-guidelines.md)

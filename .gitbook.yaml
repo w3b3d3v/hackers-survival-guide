@@ -1,8 +1,8 @@
 root: ./docs
 
 structure:
-  readme: en/README.md
-  summary: en/SUMMARY.md
+  readme: README.md
+  summary: false
 
 variants:
   - name: English
