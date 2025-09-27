@@ -1,10 +1,10 @@
-# Guia de Implantação de Smart Contracts Claude Code - Paseo TestNet
+# Checklist de Contexto para Agentes de Codificação LLM
 
 ## VISÃO GERAL
 
 Este documento fornece informações abrangentes para implantar smart contracts na Polkadot Hub TestNet (Paseo) usando Claude Code. Inclui configurações verificadas, problemas comuns, soluções e estratégias de otimização.
 
-**CRÍTICO: Sempre inicie novos projetos com `kitdot init` para configuração adequada de rede e gerenciamento de dependências.**
+**CRÍTICO: Sempre inicie novos projetos com `kitdot@latest init` para configuração adequada de rede e gerenciamento de dependências.**
 
 ## INFORMAÇÕES DA REDE
 
@@ -107,10 +107,10 @@ module.exports = {
 
 ## PROCESSO DE CONFIGURAÇÃO
 
-### Passo 1: Inicializar Projeto com kitdot (Recomendado)
+### Passo 1: Inicializar Projeto com kitdot@latest (Recomendado)
 
 ```bash
-npm install -g kitdot
+npm install -g kitdot@latest
 kitdot init seu-projeto
 cd seu-projeto
 ```
@@ -123,11 +123,11 @@ cd seu-projeto
 npm init -y
 ```
 
-**Por que kitdot?** Configura automaticamente configurações de rede, dependências e estrutura de projeto adequadas. Elimina erros comuns de configuração.
+**Por que kitdot@latest?** Configura automaticamente configurações de rede, dependências e estrutura de projeto adequadas. Elimina erros comuns de configuração.
 
 ### Passo 2: Instalar Dependências
 
-**Se usando kitdot:** Dependências são instaladas automaticamente.
+**Se usando kitdot@latest:** Dependências são instaladas automaticamente.
 
 **Instalação manual:**
 
@@ -139,7 +139,7 @@ npm install dotenv
 
 ### Passo 3: Inicializar Plugin Polkadot
 
-**Se usando kitdot:** Já configurado.
+**Se usando kitdot@latest:** Já configurado.
 
 **Configuração manual:**
 
@@ -163,7 +163,7 @@ npx hardhat vars set PRIVATE_KEY
 
 ### Passo 6: Criar Configuração Hardhat
 
-**Se usando kitdot:** Arquivo de configuração já criado com configurações adequadas.
+**Se usando kitdot@latest:** Arquivo de configuração já criado com configurações adequadas.
 
 **Configuração manual:** Copie a configuração exata acima para `hardhat.config.js`
 
@@ -401,6 +401,76 @@ contract MinimalERC721 {
 
 ## INTEGRAÇÃO FRONTEND
 
+### Problemas de Transações Frontend (Problemas de Estimação de Gas/Legacy)
+
+**CRÍTICO PARA AGENTES:** Aplicações frontend frequentemente encontram problemas de estimação de gas ao enviar transações para redes Polkadot. Sempre implemente essas estratégias:
+
+#### Método 1: Estimação de Gas Legacy com Buffer
+
+```javascript
+// Use estimação de gas legacy com buffer de segurança
+const gasLimit = await provider.estimateGas({
+  to: contractAddress,
+  data: contractInterface.encodeFunctionData("functionName", [args]),
+});
+
+// Adicione buffer de 10-20% para segurança
+const adjustedGasLimit = gasLimit.mul(120).div(100);
+
+// Envie transação com gas explícito e tipo legacy
+const tx = await contract.functionName(args, {
+  gasLimit: adjustedGasLimit,
+  type: 0, // Use tipo de transação legacy
+});
+```
+
+#### Método 2: Limites de Gas Fixos
+
+```javascript
+// Use limites de gas fixos para operações previsíveis
+const tx = await contract.functionName(args, {
+  gasLimit: 100000, // Ajuste baseado na complexidade da função
+  type: 0, // Tipo de transação legacy
+  gasPrice: ethers.utils.parseUnits("20", "gwei"), // Opcional: definir preço do gas
+});
+```
+
+#### Método 3: Tratamento de Erros e Lógica de Retry
+
+```javascript
+async function sendTransactionWithRetry(
+  contract,
+  functionName,
+  args,
+  retries = 3
+) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      // Tente com gas estimado primeiro
+      const estimatedGas = await contract.estimateGas[functionName](...args);
+      const tx = await contract[functionName](...args, {
+        gasLimit: estimatedGas.mul(120).div(100),
+        type: 0,
+      });
+      return tx;
+    } catch (error) {
+      if (i === retries - 1) throw error;
+
+      // Fallback para limite de gas fixo
+      try {
+        const tx = await contract[functionName](...args, {
+          gasLimit: 200000, // Limite fixo mais alto
+          type: 0,
+        });
+        return tx;
+      } catch (fallbackError) {
+        if (i === retries - 1) throw fallbackError;
+      }
+    }
+  }
+}
+```
+
 ### Configuração de Rede para MetaMask
 
 ```javascript
@@ -571,6 +641,196 @@ REPORT_GAS=true
 ETHERSCAN_API_KEY=your_key_here
 ```
 
+## IMPLANTAÇÃO NO POLKADOT CLOUD (APILLON)
+
+### Configuração de Conta Apillon e UUID do Website
+
+**CRÍTICO PARA AGENTES:** Ao implantar aplicações frontend no Polkadot Cloud, siga estes passos:
+
+#### Passo 1: Criar Conta Apillon
+
+**INSTRUIR O USUÁRIO PARA:**
+
+1. **Visitar Console Apillon:** https://app.apillon.io
+2. **Registrar Conta:** Usar email e criar senha segura
+3. **Verificar Email:** Completar processo de verificação de email
+4. **Conectar Carteira:** Vincular sua carteira Polkadot/Substrate para pagamentos
+5. **Gerar Credenciais API:**
+   - Ir para **Settings** → **API Keys**
+   - Clicar em **Create New API Key**
+   - Nomeá-la (ex. "Projeto Hackathon")
+   - Copiar **API Key** e **API Secret** imediatamente
+   - Armazenar com segurança - API Secret só é mostrado uma vez
+
+#### Passo 2: Criar Projeto de Website
+
+**INSTRUIR O USUÁRIO PARA:**
+
+1. **Navegar para Seção Hosting:** No console Apillon
+2. **Criar Novo Website:** Clicar no botão "New Website"
+3. **Configurar Projeto:**
+   ```
+   Project Name: [Nome do Seu Projeto]
+   Environment: Production
+   Domain: [Domínio personalizado opcional]
+   ```
+4. **Copiar UUID do Website:** Após criação, copiar o UUID gerado (formato: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
+5. **Fornecer UUID ao Agente:** Compartilhar o UUID do Website para que o agente possa configurar a implantação
+
+#### Passo 3: Obter UUID do Website para Implantação
+
+```bash
+# Exemplo formato UUID
+WEBSITE_UUID="12345678-1234-5678-9abc-123456789def"
+```
+
+### Configuração MCP para Hosting no Polkadot Cloud
+
+**Configuração do Protocolo de Contexto de Modelo (MCP):**
+
+#### Passo 1: Configuração do Servidor MCP
+
+**CRÍTICO PARA AGENTES:** Configure seu cliente MCP para usar o servidor MCP do Apillon.
+
+##### Para Claude Desktop:
+
+Adicione isso ao seu arquivo de configuração MCP:
+
+```json
+{
+  "mcpServers": {
+    "apillon-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@apillon/mcp-server"],
+      "env": {
+        "APILLON_API_KEY": "<APILLON_API_KEY>",
+        "APILLON_API_SECRET": "<APILLON_API_SECRET>"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/seu-usuario/Desktop"
+      ]
+    }
+  }
+}
+```
+
+**Passos de Configuração Claude Desktop:**
+
+1. **Localizar arquivo config MCP:** Geralmente em `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
+2. **Adicionar servidor Apillon:** Inserir a configuração acima
+3. **Substituir placeholders:** Atualizar `<APILLON_API_KEY>` e `<APILLON_API_SECRET>` com valores reais
+4. **Atualizar caminho filesystem:** Mudar `/Users/seu-usuario/Desktop` para seu diretório de projeto
+5. **Reiniciar Claude Desktop:** Necessário para que as mudanças MCP tenham efeito
+
+##### Para Cursor IDE:
+
+**Configuração MCP no Cursor:**
+
+1. **Instalar extensão MCP:** No Cursor, ir para Extensions e buscar "Model Context Protocol"
+2. **Abrir configurações Cursor:** `Cmd/Ctrl + ,` → Buscar "MCP"
+3. **Adicionar configuração servidor:**
+
+```json
+{
+  "mcp.servers": {
+    "apillon-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@apillon/mcp-server"],
+      "env": {
+        "APILLON_API_KEY": "<APILLON_API_KEY>",
+        "APILLON_API_SECRET": "<APILLON_API_SECRET>"
+      }
+    }
+  }
+}
+```
+
+**Passos de Configuração Cursor:**
+
+1. **Abrir settings.json:** `Cmd/Ctrl + Shift + P` → "Preferences: Open Settings (JSON)"
+2. **Adicionar configuração MCP:** Inserir a configuração acima
+3. **Substituir placeholders:** Atualizar credenciais API
+4. **Reiniciar Cursor:** Necessário para que as mudanças MCP tenham efeito
+5. **Verificar conexão:** Verificar status MCP na paleta de comandos do Cursor
+
+#### Passo 2: Instalar CLI do Apillon (Método Alternativo)
+
+```bash
+npm install -g @apillon/cli
+```
+
+#### Passo 3: Configurar Autenticação
+
+```bash
+# Login no Apillon
+apillon login
+
+# Verificar autenticação
+apillon whoami
+```
+
+#### Passo 4: Configurar MCP para Implantação Automatizada
+
+Criar `.apillon.json` na raiz do projeto:
+
+```json
+{
+  "websites": [
+    {
+      "uuid": "SEU_UUID_WEBSITE_AQUI",
+      "name": "Nome do Seu Projeto",
+      "source": "./dist",
+      "environment": "production"
+    }
+  ]
+}
+```
+
+#### Passo 5: Script de Implantação MCP
+
+```bash
+#!/bin/bash
+# deploy-to-polkadot-cloud.sh
+
+# Construir o projeto
+npm run build
+
+# Implantar no Apillon
+apillon hosting deploy \
+  --uuid $WEBSITE_UUID \
+  --source ./dist \
+  --environment production
+
+# Verificar implantação
+apillon hosting info --uuid $WEBSITE_UUID
+```
+
+#### Passo 6: Variáveis de Ambiente
+
+```bash
+# Definir no seu ambiente
+export APILLON_API_KEY="sua_api_key_aqui"
+export WEBSITE_UUID="seu_uuid_website_aqui"
+```
+
+### Melhores Práticas para Agentes
+
+1. **Configurar MCP primeiro:** Configurar servidor MCP do Apillon no seu IDE (Claude Desktop ou Cursor) antes de começar a implantação.
+2. **Sempre usar CLI Apillon mais recente:** `npm install -g @apillon/cli@latest`
+3. **Credenciais seguras:** Armazenar API keys e UUIDs como variáveis de ambiente, nunca no código
+4. **Guiar usuário na configuração da conta:** Instruir claramente usuários sobre criação de conta Apillon e geração de API key
+5. **Verificar implantações:** Sempre verificar status da implantação após upload
+6. **Usar ambiente produção:** Para entregas finais de hackathon
+7. **Monitorar custos:** Apillon usa modelo pay-per-use
+8. **Testar localmente primeiro:** Sempre testar builds antes de implantar
+9. **Reiniciar seu IDE:** Após mudanças de configuração MCP (Claude Desktop ou Cursor)
+10. **Verificar conexão MCP:** Verificar se servidor MCP do Apillon está conectado corretamente antes da implantação
+
 ## DIRETRIZES DE ESCRITA PARA LLMs
 
 Ao criar documentação ou ajudar desenvolvedores:
@@ -584,11 +844,11 @@ Ao criar documentação ou ajudar desenvolvedores:
 
 ## CHECKLIST DE SOLUÇÃO DE PROBLEMAS
 
-**Primeiro: Tente kitdot init com projeto novo e copie código existente**
+**Primeiro: Tente kitdot@latest init com projeto novo e copie código existente**
 
 Quando a implantação falhar, verifique:
 
-- [ ] Usado kitdot init para configuração adequada (recomendado)
+- [ ] Usado kitdot@latest init para configuração adequada (recomendado)
 - [ ] Configuração Hardhat corresponde ao formato exato acima
 - [ ] Chave privada definida via `npx hardhat vars set PRIVATE_KEY`
 - [ ] Conta tem tokens PAS suficientes
