@@ -2,6 +2,13 @@
 
 _For Developers New to Web3_
 
+## Documentation Overview
+
+- **[Polkadot Development Tools](polkadot-development-tools.md)** - Comprehensive toolkit and resource map for building on Polkadot
+- **[Smart Contracts 101](101-smart-contracts-polkadot.md)** - In-depth beginner's guide to Polkadot smart contracts
+- **[LLM Writing Guidelines](llms-writing-guidelines.md)** - Writing standards and best practices for AI agents
+- **[LLM Context Checklist](llms_checklist.md)** - Complete deployment guide and troubleshooting reference for agents
+
 ## 1. Quick Start with kitdot
 
 ### Who This Guide Is For
@@ -14,23 +21,25 @@ Deploy working smart contracts on Polkadot testnet and build a functional fronte
 
 ### Start Your Project with kitdot
 
-**Recommended**: Use kitdot for proper network configuration and project setup:
+**Recommended**: Use kitdot@latest for proper network configuration and project setup:
 
 ```bash
-npx kitdot install -y
+npx kitdot@latest install -y
 ```
 
 or
 
 ```bash
-npm install -g kitdot
+npm install -g kitdot@latest
 kitdot init my-polkadot-project
 cd my-polkadot-project
 ```
 
 **Why kitdot?** Ensures proper network settings, correct dependencies, and battle-tested configurations. Skip setup headaches and start building immediately.
 
-**Existing Project?** Start fresh with kitdot and copy your files over. This prevents configuration conflicts and network connection issues.
+**Web2 Experience on Web3:** kitdot's default setup initializes a complete frontend project that provides a familiar Web2 user experience for Web3 applications. Users interact with your dApp without needing to understand blockchain complexity.
+
+**Existing Project?** Start fresh with kitdot@latest and copy your files over. This prevents configuration conflicts and network connection issues.
 
 ## 2. Pre-Built Contract Libraries
 
@@ -45,18 +54,10 @@ Before building from scratch, explore these battle-tested contract libraries:
 - **Advantage:** Production-ready, gas-optimized implementations
 - **Note:** May need size optimization for Polkadot's 100KB limit
 
-**OpenZeppelin Contracts**
-
-- **Repository:** [OpenZeppelin/openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
-- **Best for:** Standard implementations (ERC20, ERC721, ERC1155)
-- **Advantage:** Industry standard, well-audited
-- **Note:** Often too heavy for Polkadot - use as reference for minimal implementations
-
-**Polkadot-Optimized Alternative**
+**Polkadot-Optimized OpenZeppelin Contracts**
 
 - **Repository:** [papermoonio/openzeppelin-contracts-polkadot](https://github.com/papermoonio/openzeppelin-contracts-polkadot)
-- **Best for:** Size-optimized versions for Polkadot
-- **Advantage:** Already adapted for 100KB constraint
+- **Best for:** Standard implementations (ERC20, ERC721, ERC1155)
 
 ### Strategy
 
@@ -83,12 +84,30 @@ Before building from scratch, explore these battle-tested contract libraries:
 2. Get testnet tokens from [faucet](https://faucet.polkadot.io/?parachain=1111)
 3. Start coding in browser
 
+**Getting ABI for Frontend Projects:**
+After compiling contracts in Remix:
+
+1. Go to **Solidity Compiler** tab
+2. Click on your contract name under compilation artifacts
+3. Copy the **ABI** array from the compilation details
+4. Use in frontend projects:
+
+```javascript
+// Save ABI as contractABI.json or import directly
+import { ethers } from "ethers";
+
+const contractABI = [
+  /* paste ABI array here */
+];
+const contract = new ethers.Contract(contractAddress, contractABI, signer);
+```
+
 ### Path 2: Manual Hardhat Setup (Not Recommended)
 
-**Use kitdot instead** for automated setup, but if you must set up manually:
+**Use kitdot@latest instead** for automated setup, but if you must set up manually:
 
 ```bash
-# Better: Use kitdot init instead
+# Better: Use kitdot@latest init instead
 mkdir hackathon-project && cd hackathon-project
 npm init -y
 npm install --save-dev @parity/hardhat-polkadot solc@0.8.28
@@ -96,7 +115,23 @@ npm install --force @nomicfoundation/hardhat-toolbox
 npx hardhat-polkadot init
 ```
 
-**kitdot handles this automatically** with proper network configurations.
+**IMPORTANT:** Always use `@parity/hardhat-polkadot` instead of standard hardhat. This plugin provides essential PolkaVM compatibility and network configurations required for Polkadot deployment.
+
+**kitdot@latest handles this automatically** with proper network configurations.
+
+### Path 3: Local Development Network
+
+For local testing without connecting to testnets:
+
+```bash
+# Run local generic testnet (NOT a PolkaVM testnet)
+npx hardhat node
+
+# In another terminal, deploy to local network
+npx hardhat ignition deploy ./ignition/modules/YourModule.js --network localhost
+```
+
+**Note:** This runs a standard Ethereum local testnet, not a PolkaVM-compatible network. Use for initial development and testing before deploying to Paseo.
 
 **Create hardhat.config.js:**
 
@@ -191,7 +226,46 @@ npx hardhat compile
 npx hardhat ignition deploy ./ignition/modules/YourModule.js --network passetHub
 ```
 
-## 5. Frontend Integration
+## 5. Wallet Setup (If not using default template from kitdot)
+
+### Enable Testnets on Your Wallet
+
+**MetaMask:**
+
+1. Open MetaMask extension
+2. Click on your profile icon (top right)
+3. Go to **Settings** → **Advanced**
+4. Enable **Show test networks**
+5. Your network dropdown will now show testnet options
+
+**Talisman:**
+
+1. Open Talisman extension
+2. Go to **Settings** → **Networks & Tokens**
+3. Enable **Show test networks**
+4. Testnet networks will appear in your network list
+
+### Add Paseo Network to MetaMask
+
+**Quick Method (Recommended):**
+
+1. Visit [https://chainlist.org/?search=passet](https://chainlist.org/?search=passet)
+2. Find "Polkadot Asset Hub Testnet"
+3. Click **Connect Wallet** and **Add to MetaMask**
+4. Approve the network addition in MetaMask
+
+**Manual Method:**
+
+```javascript
+// Add this configuration manually in MetaMask
+Network Name: Polkadot Hub TestNet
+Chain ID: 420420422
+RPC URL: https://testnet-passet-hub-eth-rpc.polkadot.io
+Currency Symbol: PAS
+Block Explorer: https://blockscout-passet-hub.parity-testnet.parity.io
+```
+
+## 6. Frontend Integration
 
 ### Connect to Polkadot Network
 
@@ -224,7 +298,7 @@ const result = await contract.someFunction();
 
 ### Template Projects
 
-- **kitdot (Recommended):** `kitdot init -y` - Configured templates with proper network settings
+- **kitdot@latest (Recommended):** `kitdot@latest init -y` - Configured templates with proper network settings
 - **React + Hardhat:** [create-polkadot-dapp](https://www.npmjs.com/package/create-polkadot-dapp)
 - **Examples:** [hardhat-polkadot-example](https://github.com/UtkarshBhardwaj007/hardhat-polkadot-example)
 
@@ -257,6 +331,10 @@ npx hardhat ignition track-tx <txHash> <deploymentId> --network passetHub
 - **Custom Token:** [ERC-20 Tutorial](https://docs.polkadot.com/tutorials/smart-contracts/deploy-erc20/)
 - **NFT Collection:** [NFT Tutorial](https://docs.polkadot.com/tutorials/smart-contracts/deploy-nft/)
 - **Simple DeFi:** [Uniswap V2 Example](https://github.com/papermoonio/uniswap-v2-polkadot)
+
+**Comprehensive P2P Sharing Economy Ideas:**
+
+- **[Comprehensive P2P Sharing Economy Catalog](https://docs.google.com/document/d/165krMbAVbejDAOTD2xa9CB1hDcmciHXI0LJ4hEpH2SQ):** Extensive catalog of peer-to-peer sharing economy platforms across various sectors with implemented applications and "Possible Ideas" for unexplored categories. Perfect for identifying market gaps and building decentralized alternatives.
 
 ## 8. Network Details
 
@@ -305,7 +383,6 @@ contract SimpleReentrancyGuard {
 - [Polkadot Open Source Tool Map](polkadot-development-tools.md): We've created a map of all the major open source tools on Polkadot.
 - [Polkadot Smart Contract Basic Guide](101-smart-contracts-polkadot.md): If you want to start from scratch and need more in-depth documentation on Polkadot smart contracts, such as a 101 for beginners, we suggest checking out this guide.
 
-
 **Development Environments:**
 
 - [Remix IDE](https://docs.polkadot.com/develop/smart-contracts/dev-environments/remix/)
@@ -318,8 +395,8 @@ contract SimpleReentrancyGuard {
 
 **Detailed References:**
 
-- **LLM Development Guide:** Use `llms-writing-guidelines.md` when creating documentation
-- **Complete Setup:** `docs/seed-content/llms_checklist.md`
+- **LLM Writing Guidelines:** Use `llms-writing-guidelines.md` when creating documentation
+- **LLm Context Setup:** `docs/seed-content/llms_checklist.md`
 - **Network Details:** `docs/seed-content/configs.md`
 - **Tools Overview:** `docs/polkadot-development-tools.md`
 
@@ -330,6 +407,6 @@ contract SimpleReentrancyGuard {
 
 ## Start with kitdot
 
-Use `kitdot init -y` for proper project setup with verified network configurations. Alternative templates available.
+Use `kitdot@latest init -y` for proper project setup with verified network configurations. Alternative templates available.
 
 You're building on Polkadot using familiar Ethereum tools. Focus on working functionality over perfect code.

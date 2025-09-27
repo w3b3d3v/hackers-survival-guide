@@ -1,6 +1,8 @@
-## Diretrizes de Escrita
+# Diretrizes de Escrita para Agentes de Codificação LLM
 
-### Princípios Fundamentais (Método Zinsser)
+**Público-Alvo:** Este documento fornece padrões de escrita para agentes de IA (LLMs) ao criar documentação, comentários de código e conteúdo técnico para projetos de desenvolvimento Polkadot.
+
+## Princípios Fundamentais (Método Zinsser)
 
 ### Regras de Escrita Comercial
 
@@ -18,8 +20,6 @@
 - Documentação deve responder "por quê", código mostra "o quê"
 - Descrições de PR: Declare mudanças e impactos, pule a jornada
 - Mensagens de commit: O que mudou e por quê, no tempo presente
-
-### Documentação Técnica Externa (Para usuários/desenvolvedores e não Agentes)
 
 **Brevidade é poder.** Reduza cada frase aos seus componentes mais limpos. Remova toda palavra que não serve função alguma. Substitua frases por palavras. Escolha palavras simples em vez de complexas.
 

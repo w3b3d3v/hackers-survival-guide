@@ -1,6 +1,8 @@
-## Writing Guidelines
+# Writing Guidelines for LLM Coding Agents
 
-### Core Principles (Zinsser Method)
+**Target Audience:** This document provides writing standards for AI agents (LLMs) when creating documentation, code comments, and technical content for Polkadot development projects.
+
+## Core Principles (Zinsser Method)
 
 ### Business Writing Rules
 
@@ -18,8 +20,6 @@
 - Documentation should answer "why", code shows "what"
 - PR descriptions: State changes and impacts, skip the journey
 - Commit messages: What changed and why, in present tense
-
-### External Technical Documentation (For users/developers and not Agents)
 
 **Brevity is power.** Strip every sentence to its cleanest components. Remove every word that serves no function. Replace phrases with words. Choose simple words over complex ones.
 

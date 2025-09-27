@@ -1,6 +1,8 @@
-## Guías de Escritura
+# Guías de Escritura para Agentes de Codificación LLM
 
-### Principios Fundamentales (Método Zinsser)
+**Audiencia Objetivo:** Este documento proporciona estándares de escritura para agentes de IA (LLMs) al crear documentación, comentarios de código y contenido técnico para proyectos de desarrollo de Polkadot.
+
+## Principios Fundamentales (Método Zinsser)
 
 ### Reglas de Escritura Empresarial
 
@@ -18,8 +20,6 @@
 - La documentación debe responder "por qué", el código muestra "qué"
 - Descripciones de PR: Declara cambios e impactos, omite el proceso
 - Mensajes de commit: Qué cambió y por qué, en tiempo presente
-
-### Documentación Técnica Externa (Para usuarios/desarrolladores y no Agentes)
 
 **La brevedad es poder.** Reduce cada oración a sus componentes más limpios. Elimina cada palabra que no cumple una función. Reemplaza frases con palabras. Elige palabras simples sobre las complejas.
 
