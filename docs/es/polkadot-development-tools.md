@@ -9,6 +9,7 @@ _Kit de herramientas completo para construir en el ecosistema Polkadot_
 | **PAPI** | Librería Cliente | Cliente TypeScript, light client first, fuertemente tipado | dApps Frontend & Node | [papi.how](https://papi.how) |
 | **Dedot** | Librería Cliente | Cliente JS ligero, tree-shakable con soporte multi-cadena | dApps multi-cadena eficientes | [dedotdev/dedot](https://github.com/dedotdev/dedot) |
 | **ReactiveDOT** | Capa Frontend | Bindings reactivos sobre PAPI para flujos de datos UI fluidos | Aplicaciones React/Vue | [reactivedot.dev](https://reactivedot.dev/) |
+| **kitdot** | Herramienta de Desarrollo | Inicialización rápida de proyectos con Hardhat + Polkadot | Configuración rápida de proyectos | [kitdot](https://www.npmjs.com/package/kitdot) |
 | **POP CLI** | Herramienta de Desarrollo | Scaffold para cadenas y contratos, automatiza redes locales | Scaffolding y deployment de proyectos | [onpop.io](https://onpop.io/) |
 | **Polkadot Deployment Portal** | Plataforma de Deployment | Deployment guiado de rollups con monitoreo de progreso | Rollups testnet/mainnet | [deploypolkadot.xyz](https://www.deploypolkadot.xyz/) |
 | **Paraspell** | XCM SDK | Interfaz XCM unificada compatible con PAPI y polkadot.js | Transferencias cross-chain | [paraspell/xcm-tools](https://github.com/paraspell/xcm-tools) |
