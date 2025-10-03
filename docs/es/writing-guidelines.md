@@ -1,4 +1,4 @@
-# Guías de Escritura para Agentes de Codificación LLM
+# Writing Guidelines
 
 **Audiencia Objetivo:** Este documento proporciona estándares de escritura para agentes de IA (LLMs) al crear documentación, comentarios de código y contenido técnico para proyectos de desarrollo de Polkadot.
 

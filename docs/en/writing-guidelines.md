@@ -1,4 +1,4 @@
-# Writing Guidelines for LLM Coding Agents
+# Writing Guidelines
 
 **Target Audience:** This document provides writing standards for AI agents (LLMs) when creating documentation, code comments, and technical content for Polkadot development projects.
 

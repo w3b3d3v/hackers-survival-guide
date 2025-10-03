@@ -1,4 +1,4 @@
-# Agentes de Codificación LLM: Lista de Verificación de Contexto para
+# Agents
 
 ## DESCRIPCIÓN GENERAL
 
@@ -799,7 +799,7 @@ export WEBSITE_UUID="tu_uuid_sitio_web_aqui"
 
 Al crear documentación o ayudar a desarrolladores:
 
-- [ ] **Consulta llms-writing-guidelines.md para estándares de documentación**
+- [ ] **Consulta writing-guidelines.md para estándares de documentación**
 - [ ] Usa voz activa: "Despliega el contrato" no "El contrato debería ser desplegado"
 - [ ] Lidera con resultados, no con proceso
 - [ ] Corta calificativos: "muy", "bastante", "más bien"
