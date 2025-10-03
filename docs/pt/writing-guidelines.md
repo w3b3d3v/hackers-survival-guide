@@ -1,4 +1,4 @@
-# Diretrizes de Escrita para Agentes de Codificação LLM
+# Writing Guidelines
 
 **Público-Alvo:** Este documento fornece padrões de escrita para agentes de IA (LLMs) ao criar documentação, comentários de código e conteúdo técnico para projetos de desenvolvimento Polkadot.
 

@@ -1,4 +1,4 @@
-# Checklist de Contexto para Agentes de Codificação LLM
+# Agents
 
 ## VISÃO GERAL
 
@@ -835,7 +835,7 @@ export WEBSITE_UUID="seu_uuid_website_aqui"
 
 Ao criar documentação ou ajudar desenvolvedores:
 
-- [ ] **Referencie llms-writing-guidelines.md para padrões de documentação**
+- [ ] **Referencie writing-guidelines.md para padrões de documentação**
 - [ ] Use voz ativa: "Implante o contrato" não "O contrato deve ser implantado"
 - [ ] Lidere com resultados, não processo
 - [ ] Corte qualificadores: "muito", "bastante", "relativamente"

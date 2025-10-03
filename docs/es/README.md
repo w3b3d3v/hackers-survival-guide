@@ -6,8 +6,8 @@ _Para Desarrolladores Nuevos en Web3_
 
 - **[Herramientas de Desarrollo de Polkadot](polkadot-development-tools.md)** - Conjunto completo de herramientas y mapa de recursos para construir en Polkadot
 - **[Smart Contracts 101](101-smart-contracts-polkadot.md)** - Guía completa para principiantes sobre smart contracts de Polkadot
-- **[Guías de Escritura LLM](llms-writing-guidelines.md)** - Estándares de escritura y mejores prácticas para agentes de IA
-- **[Lista de Verificación de Contexto LLM](llms_checklist.md)** - Guía completa de despliegue y referencia de solución de problemas para agentes
+- **[Writing Guidelines](writing-guidelines.md)** - Estándares de escritura y mejores prácticas para agentes de IA
+- **[Agents](Agents.md)** - Guía completa de despliegue y referencia de solución de problemas para agentes
 
 ## 1. Inicio Rápido con Kitdot
 
@@ -396,8 +396,8 @@ contract SimpleReentrancyGuard {
 
 **Referencias Detalladas:**
 
-- **Guías de Escritura LLM:** Usa `llms-writing-guidelines.md` al crear documentación
-- **Configuración de Contexto LLM:** `docs/seed-content/llms_checklist.md`
+- **Guías de Escritura:** Usa `writing-guidelines.md` al crear documentación
+- **Configuración de Contexto Agentes:** `Agents.md`
 - **Detalles de Red:** `docs/seed-content/configs.md`
 - **Visión General de Herramientas:** `docs/polkadot-development-tools.md`
 

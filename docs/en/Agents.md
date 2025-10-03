@@ -1,4 +1,4 @@
-# LLM Coding Agents Context Checklist
+# Agents
 
 ## OVERVIEW
 
@@ -835,7 +835,7 @@ export WEBSITE_UUID="your_website_uuid_here"
 
 When creating documentation or helping developers:
 
-- [ ] **Reference llms-writing-guidelines.md for documentation standards**
+- [ ] **Reference writing-guidelines.md for documentation standards**
 - [ ] Use active voice: "Deploy the contract" not "The contract should be deployed"
 - [ ] Lead with results, not process
 - [ ] Cut qualifiers: "very", "quite", "rather"
