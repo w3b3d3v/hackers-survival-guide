@@ -13,3 +13,6 @@ Thumbs.db
 
 # Logs
 *.log
+.bmad-core/
+.claude/
+install-biruleib3.sh
