@@ -1,0 +1,190 @@
+---
+# GitHub Pull Request Template
+# Use this template to create consistent, high-quality pull requests
+
+pr_metadata:
+  title_format: "[Type] Brief description (fixes #issue-number)"
+  types:
+    - feat      # New feature
+    - fix       # Bug fix
+    - docs      # Documentation changes
+    - style     # Code style changes (formatting, etc.)
+    - refactor  # Code refactoring
+    - perf      # Performance improvements
+    - test      # Adding or updating tests
+    - build     # Build system changes
+    - ci        # CI/CD changes
+    - chore     # Other maintenance tasks
+    - revert    # Reverting previous changes
+
+# PR Description Template
+description_template: |
+  ## Summary
+  Brief description of what this PR accomplishes
+
+  ## Related Issue(s)
+  - Fixes #[issue-number]
+  - Relates to #[issue-number]
+  - Closes #[issue-number]
+
+  ## Type of Change
+  Please delete options that are not relevant:
+  - [ ] Bug fix (non-breaking change which fixes an issue)
+  - [ ] New feature (non-breaking change which adds functionality)
+  - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+  - [ ] Documentation update
+  - [ ] Performance improvement
+  - [ ] Code refactoring
+  - [ ] Test improvements
+
+  ## Changes Made
+  - List the main changes made in this PR
+  - Be specific about what was added, modified, or removed
+  - Include any new dependencies or configuration changes
+
+  ## Testing
+  ### Manual Testing
+  - [ ] Tested on local development environment
+  - [ ] Tested edge cases and error scenarios
+  - [ ] Verified accessibility compliance (if applicable)
+  - [ ] Cross-browser testing completed (if applicable)
+
+  ### Automated Testing
+  - [ ] Unit tests pass
+  - [ ] Integration tests pass
+  - [ ] End-to-end tests pass (if applicable)
+  - [ ] Test coverage maintained or improved
+
+  ## Screenshots/Videos (if applicable)
+  Include before/after screenshots for UI changes:
+
+  ### Before
+  [Screenshot or description of previous state]
+
+  ### After
+  [Screenshot or description of new state]
+
+  ## Breaking Changes
+  If this PR introduces breaking changes, describe them here:
+  - What breaks?
+  - How to migrate existing code?
+  - Any deprecation notices?
+
+  ## Performance Impact
+  - [ ] No performance impact
+  - [ ] Performance improved
+  - [ ] Performance impact assessed and acceptable
+  - [ ] Performance testing completed
+
+  ## Security Considerations
+  - [ ] No security implications
+  - [ ] Security review completed
+  - [ ] No sensitive data exposed
+  - [ ] Authentication/authorization changes reviewed
+
+  ## Documentation
+  - [ ] README updated (if needed)
+  - [ ] API documentation updated (if needed)
+  - [ ] Code comments added/updated for complex logic
+  - [ ] Migration guide created (for breaking changes)
+
+  ## Deployment Notes
+  Special instructions for deployment:
+  - Any environment variables needed?
+  - Database migrations required?
+  - Configuration changes needed?
+  - Feature flags to enable/disable?
+
+  ## Reviewer Checklist
+  For reviewers to verify:
+  - [ ] Code follows project style guidelines
+  - [ ] Changes are well-tested
+  - [ ] Documentation is adequate
+  - [ ] No obvious security issues
+  - [ ] Performance impact is acceptable
+  - [ ] Breaking changes are properly documented
+
+# Review Assignment Guidelines
+reviewer_guidelines:
+  required_reviewers:
+    - team_lead: "Always required for feature changes"
+    - security_expert: "Required for security-related changes"
+    - performance_expert: "Required for performance-critical changes"
+    - domain_expert: "Required for changes in specific domains"
+
+  review_criteria:
+    code_quality:
+      - "Code is readable and maintainable"
+      - "Follows established patterns and conventions"
+      - "Proper error handling implemented"
+      - "No obvious bugs or logic errors"
+
+    testing:
+      - "Adequate test coverage"
+      - "Tests are meaningful and cover edge cases"
+      - "Manual testing instructions are clear"
+
+    documentation:
+      - "Code is self-documenting or well-commented"
+      - "Public APIs are documented"
+      - "README and docs updated as needed"
+
+    security:
+      - "No hardcoded secrets or sensitive data"
+      - "Input validation implemented where needed"
+      - "Authorization checks in place"
+
+    performance:
+      - "No obvious performance bottlenecks"
+      - "Efficient algorithms and data structures used"
+      - "Database queries optimized"
+
+# Labels Configuration
+labels:
+  priority:
+    - "priority: low"
+    - "priority: medium"
+    - "priority: high"
+    - "priority: critical"
+
+  size:
+    - "size: XS"   # < 10 lines
+    - "size: S"    # 10-99 lines
+    - "size: M"    # 100-499 lines
+    - "size: L"    # 500-999 lines
+    - "size: XL"   # 1000+ lines
+
+  type:
+    - "type: feature"
+    - "type: bugfix"
+    - "type: hotfix"
+    - "type: refactor"
+    - "type: docs"
+    - "type: test"
+
+  status:
+    - "status: draft"
+    - "status: ready-for-review"
+    - "status: needs-work"
+    - "status: approved"
+
+# Automated Checks Configuration
+automation:
+  required_status_checks:
+    - "ci/build"
+    - "ci/test"
+    - "ci/lint"
+    - "ci/security-scan"
+    - "ci/performance-test"
+
+  auto_merge_conditions:
+    - "All required reviews approved"
+    - "All status checks pass"
+    - "No merge conflicts"
+    - "Branch is up to date"
+
+  notifications:
+    - "Notify on review request"
+    - "Notify on approval"
+    - "Notify on merge"
+    - "Notify on conflict"

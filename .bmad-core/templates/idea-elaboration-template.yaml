@@ -1,0 +1,300 @@
+name: Idea Elaboration & Context Enhancement
+description: Template for clarifying and adding context to vague or incomplete ideas
+version: "1.0"
+author: PM Agent
+elicit: true
+
+sections:
+  - id: original_idea
+    title: "Original Idea"
+    description: "The original idea or note that needs clarification"
+    fields:
+      - name: original_text
+        label: "Original Idea/Note"
+        type: textarea
+        required: true
+        placeholder: "Paste the original idea or note text here"
+        
+      - name: source_context
+        label: "Where did this idea come from?"
+        type: text
+        required: false
+        placeholder: "Meeting notes, brainstorm session, user feedback, etc."
+        
+      - name: idea_category
+        label: "Idea Category"
+        type: select
+        required: true
+        options:
+          - "Feature/Product"
+          - "Business/Strategy"  
+          - "Technical/Architecture"
+          - "Marketing/Growth"
+          - "Operations/Process"
+          - "User Experience"
+          - "Other"
+
+  - id: context_gaps
+    title: "Context Gap Analysis"
+    description: "Identify what information is missing"
+    fields:
+      - name: user_value_gaps
+        label: "User Value Gaps"
+        type: textarea
+        required: true
+        placeholder: "What's unclear about who benefits and how?"
+        
+      - name: business_impact_gaps
+        label: "Business Impact Gaps"
+        type: textarea
+        required: true
+        placeholder: "What's unclear about business goals and success metrics?"
+        
+      - name: implementation_gaps
+        label: "Implementation Gaps"
+        type: textarea
+        required: true
+        placeholder: "What's unclear about how to build or implement this?"
+        
+      - name: scope_definition_gaps
+        label: "Scope Definition Gaps"
+        type: textarea
+        required: true
+        placeholder: "What's unclear about boundaries and complexity?"
+
+  - id: user_value_clarification
+    title: "User Value Clarification"
+    description: "Define who benefits and how"
+    fields:
+      - name: target_users
+        label: "Who specifically would use/benefit from this?"
+        type: textarea
+        required: true
+        placeholder: "Be specific: new users, power users, admin users, etc."
+        
+      - name: user_problem
+        label: "What specific problem does this solve for users?"
+        type: textarea
+        required: true
+        placeholder: "What frustration, inefficiency, or need does this address?"
+        
+      - name: current_solution
+        label: "How do users currently handle this problem?"
+        type: textarea
+        required: true
+        placeholder: "Workarounds, manual processes, competitor tools, etc."
+        
+      - name: user_success_criteria
+        label: "How would users know this idea was successful?"
+        type: textarea
+        required: true
+        placeholder: "What would users be able to do that they can't do now?"
+
+  - id: business_impact_clarification
+    title: "Business Impact Clarification"
+    description: "Define business goals and success metrics"
+    fields:
+      - name: business_goal
+        label: "What business goal does this support?"
+        type: textarea
+        required: true
+        placeholder: "Revenue growth, user acquisition, retention, efficiency, etc."
+        
+      - name: success_metrics
+        label: "How will you measure success?"
+        type: textarea
+        required: true
+        placeholder: "Specific, measurable metrics (KPIs, conversion rates, etc.)"
+        
+      - name: business_impact_timeline
+        label: "When do you expect to see business impact?"
+        type: text
+        required: true
+        placeholder: "Immediately, 3 months, 6 months, etc."
+        
+      - name: opportunity_cost
+        label: "What's the cost of NOT doing this?"
+        type: textarea
+        required: true
+        placeholder: "Lost revenue, competitive disadvantage, user churn, etc."
+
+  - id: implementation_clarification
+    title: "Implementation Clarification"
+    description: "Define what needs to be built and how"
+    fields:
+      - name: user_experience
+        label: "What would this look like to users?"
+        type: textarea
+        required: true
+        placeholder: "User interface, user flow, interaction model"
+        
+      - name: core_components
+        label: "What are the main components that need to be built?"
+        type: textarea
+        required: true
+        placeholder: "APIs, databases, UI components, integrations, etc."
+        
+      - name: technical_approach
+        label: "What's the general technical approach?"
+        type: textarea
+        required: false
+        placeholder: "High-level architecture, key technologies, integration points"
+        
+      - name: similar_solutions
+        label: "Are there similar solutions you can reference?"
+        type: textarea
+        required: false
+        placeholder: "Competitor features, existing tools, industry standards"
+
+  - id: scope_definition
+    title: "Scope Definition"
+    description: "Define boundaries and complexity"
+    fields:
+      - name: mvp_scope
+        label: "What's the simplest version that would be valuable?"
+        type: textarea
+        required: true
+        placeholder: "Minimum features for basic user value"
+        
+      - name: full_scope
+        label: "What would the complete version include?"
+        type: textarea
+        required: true
+        placeholder: "All features and capabilities you envision"
+        
+      - name: explicitly_excluded
+        label: "What is explicitly NOT included?"
+        type: textarea
+        required: true
+        placeholder: "Features, use cases, or complexity that's out of scope"
+        
+      - name: dependencies
+        label: "What other features or systems does this depend on?"
+        type: textarea
+        required: true
+        placeholder: "Prerequisites, integrations, infrastructure needs"
+
+  - id: priority_rationale
+    title: "Priority & Timeline Rationale"
+    description: "Explain why this matters and when"
+    fields:
+      - name: importance_now
+        label: "Why is this important to do now vs. later?"
+        type: textarea
+        required: true
+        placeholder: "Urgency factors, market timing, user needs, etc."
+        
+      - name: relative_priority
+        label: "How important is this compared to other features?"
+        type: select
+        required: true
+        options:
+          - "Critical (MVP blocker)"
+          - "High (strongly recommended for MVP)"
+          - "Medium (nice to have for MVP)"
+          - "Low (post-MVP)"
+          - "Future (6+ months out)"
+        
+      - name: effort_estimate
+        label: "How complex do you think this would be to implement?"
+        type: select
+        required: true
+        options:
+          - "Small (1-2 weeks)"
+          - "Medium (3-4 weeks)"
+          - "Large (5-8 weeks)"
+          - "Extra Large (2+ months)"
+          - "Unknown (need research)"
+        
+      - name: risk_factors
+        label: "What could make this more difficult than expected?"
+        type: textarea
+        required: true
+        placeholder: "Technical unknowns, integration complexity, user adoption challenges"
+
+  - id: enhanced_definition
+    title: "Enhanced Idea Definition"
+    description: "Synthesized, complete idea definition"
+    fields:
+      - name: idea_name
+        label: "Clear, Descriptive Name for This Idea"
+        type: text
+        required: true
+        placeholder: "What would you call this feature/initiative?"
+        
+      - name: user_value_statement
+        label: "User Value Statement"
+        type: textarea
+        required: true
+        placeholder: "As a [user type], I want [capability] so that [benefit]"
+        
+      - name: business_value_statement
+        label: "Business Value Statement"
+        type: textarea
+        required: true
+        placeholder: "This will [business impact] by [mechanism] within [timeframe]"
+        
+      - name: success_definition
+        label: "Definition of Success"
+        type: textarea
+        required: true
+        placeholder: "We'll know this is successful when [measurable outcomes]"
+        
+      - name: implementation_summary
+        label: "Implementation Summary"
+        type: textarea
+        required: true
+        placeholder: "High-level summary of what needs to be built"
+
+  - id: next_steps
+    title: "Next Steps & Follow-up"
+    description: "What happens next with this idea"
+    fields:
+      - name: immediate_actions
+        label: "What should happen next with this idea?"
+        type: textarea
+        required: true
+        placeholder: "Research, prototyping, user validation, technical spike, etc."
+        
+      - name: additional_research_needed
+        label: "What additional information or research is needed?"
+        type: textarea
+        required: false
+        placeholder: "User research, technical investigation, competitive analysis, etc."
+        
+      - name: stakeholders_to_involve
+        label: "Who else should be involved in refining this idea?"
+        type: textarea
+        required: false
+        placeholder: "Design team, engineering lead, users, subject matter experts"
+        
+      - name: decision_timeline
+        label: "When does this need to be decided for the roadmap?"
+        type: text
+        required: true
+        placeholder: "Next week, end of month, before next quarter, etc."
+
+validation_rules:
+  - field: target_users
+    rule: "Should be specific user segments, not 'everyone'"
+    
+  - field: success_metrics
+    rule: "Should include measurable, quantitative metrics"
+    
+  - field: mvp_scope
+    rule: "Should be significantly simpler than full scope"
+    
+  - field: user_value_statement
+    rule: "Should follow 'As a X, I want Y so that Z' format"
+
+output_format: markdown
+output_sections:
+  - original_idea
+  - context_gaps
+  - user_value_clarification
+  - business_impact_clarification
+  - implementation_clarification
+  - scope_definition
+  - priority_rationale
+  - enhanced_definition
+  - next_steps
